@@ -1,0 +1,28 @@
+\frametitle{size results}
+    \resizebox{\framewidth}{!}{\begin{tabular}{ |c||c|c|c|c|c| }
+		\hline
+		k & total  & $\ns(L) < |\LD(L)|$ &  $\ns(L) < \natm(L)$ & $\ns(L) < \nsyn(L)$ & unknown \\
+		\hhline{|=#=|=|=|=|=|}
+        1  & \textbf{2} & \textbf{1} (50.0\%) & \textbf{0} (0.0\%) & \textbf{0} (0.0\%) & 0 \\
+		\hline
+        2  & \textbf{24} & \textbf{3} (12.5\%)&  \textbf{0} (0.0\%) & \textbf{0} (0.0\%) & 0 \\
+		\hline
+        3  & \textbf{1028} & \textbf{123} (12.0\%) &  \textbf{0} (0.0\%) & \textbf{0} (0.0\%) & 0 \\
+		\hline
+        4  & \textbf{56014} & \textbf{5911} (10.6\%) &  \textbf{86} (0.15\%) &\textbf{86} (0.15\%) & 0 \\
+		\hline
+        5 & \textbf{3705306} & \textbf{335820} (9.1\%)&  \textbf{13376} (0.36\%) & \textbf{11122} (0.30\%) & 0 \\
+		\hline
+        6 & 1269000 & 98376 (7.8\%) & 5399 (0.43\%) & 4540 (0.36\%) & 0 \\
+		\hline
+        7 & 1000000 & 67904 (6.8\%) & 4159 (0.42\%) & & 93 \\
+        \hline
+        8 & 1000000 & 60497 (6.0\%) & 4084 (0.41\%) & & 362 \\
+        \hline
+        9 & 1000000 & 55131 (5.5\%) & 3668 (0.37\%) & & 372 \\
+        \hline
+        10 & 1000000 & 51563 (5.2\%) & 3598 (0.36\%) & & 318 \\
+        \hline
+        11 & 1000000 & 48070 (4.8\%) & 3465 (0.34\%) & & 241 \\
+        \hline
+	\end{tabular}}
