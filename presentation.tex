@@ -94,13 +94,13 @@
 \end{frame}
 
 \begin{frame}[fragile]
-    We are searching for an nfa $N$ with states $\mathbf{k}$:
+    We are searching for a union nfa $N$ with states $\mathbf{k}$:
     \begin{itemize}
         \pause
-        \item $N$ is a union nfa: $H ⊆ \mathbf{k} × Q$
+        \item $H ⊆ \mathbf{k} × Q$:
         $$H[i] = X ⇔ L(N, i) = ⋃\{ L(M, q) : q ∈ X \}$$
         \pause
-        \item $N$ accepts $L$: $G ⊆ \LD(L) × \mathbf{k}$
+        \item $G ⊆ \LD(L) × \mathbf{k}$:
         $$G[u^{-1}L] = Y ⇔ u^{-1}L = ⋃\{ L(N, i) : i ∈ Y \}$$
     \end{itemize}
     
@@ -199,7 +199,7 @@
               edge node [swap] {a} (q_2)
                 edge [loop left] node {b}();
       \end{tikzpicture}
-      \caption*{$\mathbf{syn}(L)$}
+      \caption*{$\dfa(L^r)^R ≅ \mathbf{syn}(L)$}
       \end{subfigure}
       \begin{subfigure}{0.4\framewidth}
       \begin{tikzpicture}[shorten >=1pt,node distance=1.2cm,on grid,auto,scale=0.6, every node/.style={scale=0.6}]
@@ -217,10 +217,47 @@
              edge node [swap] {b} (q_2)
              edge [bend left] node {a} (q_1);
       \end{tikzpicture}
-      \caption*{$N_\mathds{syn}$}
+      \caption*{$N_\text{atm} = N_\text{syn}$}
       \end{subfigure}
       \end{figure}
     \end{center}
+\end{frame}
+
+\include{src/biclique}
+
+\begin{frame}
+    \centering\large Implementation
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{size results}
+    \resizebox{\framewidth}{!}{\begin{tabular}{ |c||c|c|c|c|c| }
+		\hline
+		k & total  & $\ns(L) < |\LD(L)|$ &  $\ns(L) < \natm(L)$ & $\ns(L) < \nsyn(L)$ & unknown \\
+		\hhline{|=#=|=|=|=|=|}
+        1  & \textbf{2} & \textbf{1} (50.0\%) & \textbf{0} (0.0\%) & \textbf{0} (0.0\%) & 0 \\
+		\hline
+        2  & \textbf{24} & \textbf{3} (12.5\%)&  \textbf{0} (0.0\%) & \textbf{0} (0.0\%) & 0 \\
+		\hline
+        3  & \textbf{1028} & \textbf{123} (12.0\%) &  \textbf{0} (0.0\%) & \textbf{0} (0.0\%) & 0 \\
+		\hline
+        4  & \textbf{56014} & \textbf{5911} (10.6\%) &  \textbf{86} (0.15\%) &\textbf{86} (0.15\%) & 0 \\
+		\hline
+        5 & \textbf{3705306} & \textbf{335820} (9.1\%)&  \textbf{13376} (0.36\%) & \textbf{11122} (0.30\%) & 0 \\
+		\hline
+        6 & 1269000 & 98376 (7.8\%) & 5399 (0.43\%) & 4540 (0.36\%) & 0 \\
+		\hline
+        7 & 1000000 & 67904 (6.8\%) & 4159 (0.42\%) & & 93 \\
+        \hline
+        8 & 1000000 & 60497 (6.0\%) & 4084 (0.41\%) & & 362 \\
+        \hline
+        9 & 1000000 & 55131 (5.5\%) & 3668 (0.37\%) & & 372 \\
+        \hline
+        10 & 1000000 & 51563 (5.2\%) & 3598 (0.36\%) & & 318 \\
+        \hline
+        11 & 1000000 & 48070 (4.8\%) & 3465 (0.34\%) & & 241 \\
+        \hline
+	\end{tabular}}
 \end{frame}
 
 \begin{frame}
@@ -265,6 +302,9 @@
             \end{groupplot}
         \end{tikzpicture}
     \end{figure}
+    \begin{center}
+        \textcolor{blue}{kw} \qquad \textcolor{red}{union}
+    \end{center}
 \end{frame}
 
 \begin{frame}
@@ -308,35 +348,10 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}[fragile]
-    \frametitle{size results}
-    \resizebox{\framewidth}{!}{\begin{tabular}{ |c||c|c|c|c|c| }
-		\hline
-		k & total  & $\ns(L) < |\LD(L)|$ &  $\ns(L) < \natm(L)$ & $\ns(L) < \nsyn(L)$ & unknown \\
-		\hhline{|=#=|=|=|=|=|}
-        1  & \textbf{2} & \textbf{1} (50.0\%) & \textbf{0} (0.0\%) & \textbf{0} (0.0\%) & 0 \\
-		\hline
-        2  & \textbf{24} & \textbf{3} (12.5\%)&  \textbf{0} (0.0\%) & \textbf{0} (0.0\%) & 0 \\
-		\hline
-        3  & \textbf{1028} & \textbf{123} (12.0\%) &  \textbf{0} (0.0\%) & \textbf{0} (0.0\%) & 0 \\
-		\hline
-        4  & \textbf{56014} & \textbf{5911} (10.6\%) &  \textbf{86} (0.15\%) &\textbf{86} (0.15\%) & 0 \\
-		\hline
-        5 & \textbf{3705306} & \textbf{335820} (9.1\%)&  \textbf{13376} (0.36\%) & \textbf{11122} (0.30\%) & 0 \\
-		\hline
-        6 & 1269000 & 98376 (7.8\%) & 5399 (0.43\%) & 4540 (0.36\%) & 0 \\
-		\hline
-        7 & 1000000 & 67904 (6.8\%) & 4159 (0.42\%) & & 93 \\
-        \hline
-        8 & 1000000 & 60497 (6.0\%) & 4084 (0.41\%) & & 362 \\
-        \hline
-        9 & 1000000 & 55131 (5.5\%) & 3668 (0.37\%) & & 372 \\
-        \hline
-        10 & 1000000 & 51563 (5.2\%) & 3598 (0.36\%) & & 318 \\
-        \hline
-        11 & 1000000 & 48070 (4.8\%) & 3465 (0.34\%) & & 241 \\
-        \hline
-	\end{tabular}}
+\begin{frame}
+    \begin{center}
+        \large Thank you for your attention!
+    \end{center}
 \end{frame}
 
 \end{document}
